@@ -10,7 +10,7 @@ export default async ({ req, res, log, error }) => {
 
   if (req.method === 'GET') {
     const response = await db.listDocuments(
-      process.env.DB_ID,
+      process.env.DATABASE_ID,
       process.env.COLLECTION_ID
     );
     console.log(response);
