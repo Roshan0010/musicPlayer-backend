@@ -1,4 +1,20 @@
-export default async({req,res,log,error})=>{
-    return res.send("hello ji");
-    }
-    
+import { Client, Databases } from 'node-appwrite';
+
+export default async ({ req, res, log, error }) => {
+
+  const client = new Client();
+  client.setEndpoint(process.env.URL);
+  client.setProject(process.env.PROJECT_ID);
+
+  const db = new Databases(client);
+
+  if (req.method === 'GET') {
+    const response = await db.listDocuments(
+      process.env.DB_ID,
+      process.env.COLLECTION_ID
+    );
+    console.log(response);
+    return res.json(response);
+  }
+  
+};
