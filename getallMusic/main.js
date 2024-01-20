@@ -8,17 +8,21 @@ export default async ({ req, res, log, error }) => {
     client.setProject(process.env.PROJECT_ID);
 
     const db = new Databases(client);
-    
-    if (req.method === 'GET') {
-      const response = await db.listDocuments(
-        process.env.DATABASE_ID,
-        process.env.COLLECTION_ID
-      );
-      return res.json(response.documents);
+    try {
+        if (req.method === 'GET') {
+            const response = await db.listDocuments(
+              process.env.DATABASE_ID,
+              process.env.COLLECTION_ID
+            );
+            return res.json(response.documents);
+          } 
+    } catch (error) {
+        return res.json({ error: "1" });
     }
+    
   } catch (err) {
     console.error('Error:', err.message);
-    return res.json({ error: err.message });
+    return res.json({ error: "2" });
   }
 
 };
