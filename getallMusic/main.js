@@ -18,7 +18,7 @@ export default async ({ req, res, log, error }) => {
     }
   } catch (err) {
     console.error('Error:', err.message);
-    return res.json({ error: 'Server Error' });
+    return res.json({ error: err.message });
   }
 
 };
